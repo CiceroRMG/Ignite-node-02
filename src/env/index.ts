@@ -1,8 +1,14 @@
-import 'dotenv/config'
+import { config } from 'dotenv'
 import { z } from 'zod'
 
 // o zod é uma biblioteca de validações que é bem integravel com typescript
 // dessa forma podemos fazer validações das variaveis env antes da aplicação rodar
+
+if (process.env.NODE_ENV === 'test') {
+  config({ path: '.env.test' })
+} else {
+  config()
+}
 
 const envSchema = z.object({
   DATABASE_URL: z.string(),
